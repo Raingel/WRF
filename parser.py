@@ -5,7 +5,7 @@ import pandas as pd
 import requests
 import os
 import re
-
+import shutil
 # %%
 import argparse
 parser = argparse.ArgumentParser()
@@ -74,6 +74,10 @@ def grb_to_csv(grb, grb_name):
     pd.DataFrame(result).to_csv(os.path.join(ROOT,'csv',grb_name+'_value.csv'), index=False)
 
 # %%
+#regenerate csv dir
+shutil.rmtree(os.path.join(ROOT,'csv'))
+os.mkdir(os.path.join(ROOT,'csv'))
+#scan grib dir
 for f in os.scandir(ROOT+"grib"):
     if f.name[-4:] == 'grb2':
         grbs = pygrib.open(f.path)
