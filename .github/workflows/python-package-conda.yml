@@ -36,6 +36,10 @@ jobs:
     - name: run parser
       run: |
         python parser.py --API ${{ secrets.CWB_TOKEN }}
+        
+    - name: compress csv folder
+      run: |
+        tar -czvf csv.tar.gz ./csv
     - name: Commit files
       continue-on-error: true
       run: |
